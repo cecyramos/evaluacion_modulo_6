@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Tareas - Gestor de Tareas{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-10 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Mis Tareas</h2>
+            <a href="{% url 'agregar_tarea' %}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Agregar Nueva Tarea
+            </a>
+        </div>
+
+        <!-- Mensajes de éxito/error -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Mostrar tareas o mensaje vacío -->
+        {% if tareas %}
+            <div class="row">
+                {% for tarea in tareas %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ tarea.titulo }}</h5>
+                                <p class="card-text text-muted">{{ tarea.descripcion|truncatewords:20 }}</p>
+                                <small class="text-secondary">
+                                    <i class="bi bi-calendar"></i> {{ tarea.fecha_creacion }}
+                                </small>
+                            </div>
+                            <div class="card-footer bg-white border-top">
+                                <div class="btn-group w-100" role="group">
+                                    <a href="{% url 'detalle_tarea' tarea.id %}" class="btn btn-sm btn-primary">
+                                        Ver Detalles
+                                    </a>
+                                    <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn btn-sm btn-danger">
+                                        Eliminar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center mt-5">
+                <h4>No tienes tareas</h4>
+                <p>¡Crea tu primera tarea para comenzar!</p>
+                <a href="{% url 'agregar_tarea' %}" class="btn btn-info mt-3">
+                    Crear Primera Tarea
+                </a>
+            </div>
+        {% endif %}
+
+        <!-- Estadísticas -->
+        <div class="mt-5 p-3 bg-light rounded">
+            <small class="text-muted">
+                <strong>Total de tareas:</strong> {{ total_tareas }}
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

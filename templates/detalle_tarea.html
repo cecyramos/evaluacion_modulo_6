@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de Tarea - Gestor de Tareas{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8 mx-auto">
+        <!-- Botón volver -->
+        <div class="mb-3">
+            <a href="{% url 'lista_tareas' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a Tareas
+            </a>
+        </div>
+
+        <!-- Mensajes -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Tarjeta de detalle -->
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-file-text"></i> {{ tarea.titulo }}
+                </h3>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <h5 class="card-title text-secondary">Descripción</h5>
+                    <p class="card-text lead">
+                        {{ tarea.descripcion }}
+                    </p>
+                </div>
+
+                <hr>
+
+                <!-- Información adicional -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Fecha de Creación</h6>
+                        <p class="fs-5">
+                            <i class="bi bi-calendar-event"></i> {{ tarea.fecha_creacion }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Estado</h6>
+                        <p class="fs-5">
+                            {% if tarea.completada %}
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Completada
+                                </span>
+                            {% else %}
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-clock"></i> Pendiente
+                                </span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="card-footer bg-light">
+                <div class="btn-group w-100" role="group">
+                    <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">
+                        <i class="bi bi-list"></i> Volver al Listado
+                    </a>
+                    <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Eliminar Tarea
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enlace a volver -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'lista_tareas' %}" class="text-decoration-none">
+                ← Volver a mis tareas
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

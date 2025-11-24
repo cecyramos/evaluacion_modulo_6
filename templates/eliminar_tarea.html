@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Tarea - Gestor de Tareas{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+        <!-- Mensajes -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Tarjeta de confirmación -->
+        <div class="card shadow-lg border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-exclamation-triangle"></i> Eliminar Tarea
+                </h4>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Aviso -->
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    <span>
+                        <strong>Advertencia:</strong> Esta acción no se puede deshacer.
+                    </span>
+                </div>
+
+                <!-- Información de la tarea -->
+                <div class="bg-light p-3 rounded mb-4">
+                    <h5 class="mb-2">Tarea a Eliminar:</h5>
+                    <p class="mb-1">
+                        <strong>Título:</strong> {{ tarea.titulo }}
+                    </p>
+                    <p class="mb-1">
+                        <strong>Descripción:</strong> {{ tarea.descripcion|truncatewords:15 }}
+                    </p>
+                    <small class="text-muted">
+                        <strong>Creada:</strong> {{ tarea.fecha_creacion }}
+                    </small>
+                </div>
+
+                <!-- Pregunta de confirmación -->
+                <h6 class="text-danger mb-3">
+                    ¿Estás seguro de que deseas eliminar esta tarea?
+                </h6>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="card-footer bg-light">
+                <form method="POST" class="d-flex gap-2 justify-content-between">
+                    {% csrf_token %}
+
+                    <!-- Botón Eliminar -->
+                    <button type="submit" class="btn btn-danger btn-lg flex-grow-1">
+                        <i class="bi bi-trash"></i> Sí, Eliminar
+                    </button>
+
+                    <!-- Botón Cancelar -->
+                    <a href="{% url 'lista_tareas' %}" class="btn btn-secondary btn-lg flex-grow-1">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+
+        <!-- Enlace de seguridad -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'detalle_tarea' tarea.id %}" class="text-decoration-none text-muted">
+                Ver detalles de la tarea
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

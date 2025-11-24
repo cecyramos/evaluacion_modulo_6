@@ -13,6 +13,7 @@ Aplicación web para gestionar tareas personales. Los usuarios pueden registrars
 ## Requisitos Previos
 
 - Python 3.8+
+- Django 5.2+
 - pip
 
 ## Instalación

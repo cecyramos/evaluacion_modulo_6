@@ -74,7 +74,7 @@ Accede a `http://127.0.0.1:8000/`
 ---
 
 ## Estructura del Proyecto
-
+```txt
 M6_evaluacion_modulo/
 ├── gestor_tareas/          # Configuración principal del proyecto
 │   ├── settings.py         # Configuración de Django

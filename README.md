@@ -103,7 +103,7 @@ M6_evaluacion_modulo/
 ├── manage.py               # Gestor de Django
 ├── requirements.txt        # Dependencias del proyecto
 └── README.md              # Este archivo
-
+```
 ---
 
 ## Funcionalidades Principales

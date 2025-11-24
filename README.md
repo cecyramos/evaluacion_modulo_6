@@ -19,7 +19,7 @@ Aplicación web para gestionar tareas personales. Los usuarios pueden registrars
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/tu_usuario/M6_evaluacion_modulo.git
+git clone https://github.com/cecyramos/evaluacion_modulo_6.git
 cd M6_evaluacion_modulo
 ```
 
